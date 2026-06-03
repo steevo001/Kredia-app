@@ -25,7 +25,7 @@ export default function Home() {
         <h1>One platform.<br /><em>Three modules.</em><br /><span className="line2">Built for OAU.</span></h1>
         <p className="hero-sub">A unified ecosystem transforming the student experience — from cashless skill trading to AI-powered exam prep and real-time campus navigation.</p>
         <div className="hero-actions">
-          <Link to="/barter" className="btn-dark">Explore Platform</Link>
+          <Link to="/marketplace" className="btn-dark">Explore Platform</Link>
         </div>
       </section>
 
@@ -39,28 +39,52 @@ export default function Home() {
           <p className="section-desc">Shared authentication, shared user profiles, and a credit economy that ties every product together into a single ecosystem.</p>
         </RevealSection>
         <RevealSection className="container" style={{ marginTop: 0 }}>
-          <div className="products-grid">
-            <Link to="/barter" className="product-card card-barter" style={{ textDecoration: 'none' }}>
+          <div className="module-showcase card-barter">
+            <div className="module-content">
               <div className="card-num">01 · Live Now</div>
               <div className="card-icon">🤝</div>
-              <h3>Skill Barter</h3>
+              <h3>Marketplace</h3>
               <p>Cashless peer-to-peer skill exchange. Trade tutoring, design, coding, and writing — no cash needed, just credits.</p>
               <span className="card-status status-live">Active</span>
-            </Link>
-            <Link to="/brain" className="product-card card-brain" style={{ textDecoration: 'none' }}>
+              <div style={{ marginTop: '2.5rem' }}>
+                <Link to="/marketplace" className="btn-outline">Explore Marketplace</Link>
+              </div>
+            </div>
+            <div className="module-image">
+              <img src="/images/marketplace.png" alt="Kredia Marketplace Concept" />
+            </div>
+          </div>
+
+          <div className="module-showcase module-reverse card-brain">
+            <div className="module-content">
               <div className="card-num">02 · Live Now</div>
               <div className="card-icon">🧠</div>
               <h3>OAU Brain</h3>
               <p>AI tutor trained on OAU past questions and lecture materials. Understands how your specific lecturers set their exams.</p>
               <span className="card-status status-live">Active</span>
-            </Link>
-            <Link to="/grid" className="product-card card-grid" style={{ textDecoration: 'none' }}>
+              <div style={{ marginTop: '2.5rem' }}>
+                <Link to="/brain" className="btn-outline">Try OAU Brain</Link>
+              </div>
+            </div>
+            <div className="module-image">
+              <img src="/images/brain.png" alt="OAU Brain Concept" />
+            </div>
+          </div>
+
+          <div className="module-showcase card-grid">
+            <div className="module-content">
               <div className="card-num">03 · Coming Soon</div>
               <div className="card-icon">🗺️</div>
               <h3>Space Grid</h3>
               <p>Real-time crowdsourced campus study space map. See which rooms have power, how crowded they are, and join study pods.</p>
               <span className="card-status status-soon">Coming Soon</span>
-            </Link>
+              <div style={{ marginTop: '2.5rem' }}>
+                <Link to="/grid" className="btn-outline">View Campus Map</Link>
+              </div>
+            </div>
+            <div className="module-image">
+              <img src="/images/grid.png" alt="Space Grid Concept" />
+            </div>
           </div>
         </RevealSection>
       </section>
@@ -70,7 +94,7 @@ export default function Home() {
         <div className="container">
           <h2>The OAU student<br />experience, <em>rebuilt.</em></h2>
           <p>One platform. Credits that flow between every module. Built by OAU students, for OAU students.</p>
-          <Link to="/barter" className="btn-light">Start with Skill Barter</Link>
+          <Link to="/marketplace" className="btn-light">Start with Marketplace</Link>
           <Link to="/brain" className="btn-ghost-light">Try OAU Brain</Link>
         </div>
       </section>

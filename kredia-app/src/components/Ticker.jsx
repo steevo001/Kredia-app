@@ -1,15 +1,21 @@
 export default function Ticker() {
-  const items = [
-    'Skill Barter', 'Credit Economy', 'OAU Brain', 'RAG Pipeline',
-    'Space Grid', 'Live Campus Map', 'React + Supabase', 'Vector Search',
+  const baseItems = [
+    'Marketplace', 'Credit Economy', 'OAU Brain',
+    'Space Grid', 'Live Campus Map',
   ]
-  const doubled = [...items, ...items]
+  // Duplicate the array multiple times to ensure the container is wider than any screen
+  const items = [...baseItems, ...baseItems, ...baseItems, ...baseItems]
 
   return (
     <div className="ticker-wrap">
       <div className="ticker">
-        {doubled.map((item, i) => (
-          <span className="ticker-item" key={i}>{item}</span>
+        {items.map((item, i) => (
+          <span className="ticker-item" key={`t1-${i}`}>{item}</span>
+        ))}
+      </div>
+      <div className="ticker" aria-hidden="true">
+        {items.map((item, i) => (
+          <span className="ticker-item" key={`t2-${i}`}>{item}</span>
         ))}
       </div>
     </div>

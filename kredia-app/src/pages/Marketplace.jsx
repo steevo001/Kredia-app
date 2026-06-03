@@ -1,123 +1,125 @@
-import { useState, useEffect } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const ALL_LISTINGS = [
-  { id: 1, title: 'MTH 202 Tutoring', category: 'Academic Tutoring', price: '4 cr', seller: 'Adebayo K.', rating: 4.8 },
-  { id: 2, title: 'CV & Resume Writing', category: 'Services', price: '2 cr', seller: 'Funmi A.', rating: 4.9 },
-  { id: 3, title: 'Used Engineering Drawing Set', category: 'Goods', price: '15 cr', seller: 'Chidi O.', rating: 4.7 },
-  { id: 4, title: 'Slide Design (PowerPoint)', category: 'Services', price: '3 cr', seller: 'Amina B.', rating: 4.6 },
-  { id: 5, title: 'Python Data Analysis', category: 'Services', price: '4 cr', seller: 'Tunde M.', rating: 4.5 },
-  { id: 6, title: 'PHY 105 Crash Course', category: 'Academic Tutoring', price: '5 cr', seller: 'Ngozi E.', rating: 4.8 },
-  { id: 7, title: 'Fairly Used Lab Coat', category: 'Goods', price: '8 cr', seller: 'Daniel S.', rating: 4.2 },
+const INITIAL_LISTINGS = [
+  { id: 1, name: 'Adebayo K.', skill: 'MTH 202 Tutoring', category: 'Tutoring', rate: 4, rating: 4.8, reviews: 12 },
+  { id: 2, name: 'Funmi A.', skill: 'CV & Resume Writing', category: 'Writing', rate: 2, rating: 4.9, reviews: 28 },
+  { id: 3, name: 'Chidi O.', skill: 'React Frontend Dev', category: 'Coding', rate: 5, rating: 4.7, reviews: 8 },
+  { id: 4, name: 'Amina B.', skill: 'Slide Design (PowerPoint)', category: 'Design', rate: 3, rating: 4.6, reviews: 15 },
+  { id: 5, name: 'Tunde M.', skill: 'Python Data Analysis', category: 'Coding', rate: 4, rating: 4.5, reviews: 6 },
+  { id: 6, name: 'Ngozi E.', skill: 'Academic Writing Help', category: 'Writing', rate: 3, rating: 4.8, reviews: 20 },
 ]
 
-export default function Marketplace() {
-  const location = useLocation()
-  const queryParams = new URLSearchParams(location.search)
-  const initialCategory = queryParams.get('category') || 'All'
+const TRANSACTIONS = [
+  { name: 'MTH 202 Tutoring — Earned', time: 'Today, 3:15 PM', amount: '+4 cr', type: 'pos', color: 'var(--brain)' },
+  { name: 'CV Writing — Spent', time: 'Yesterday, 11:00 AM', amount: '−2 cr', type: 'neg', color: '#c0392b' },
+  { name: 'Past question verified', time: 'Mon, 9:00 AM', amount: '+2 cr', type: 'pos', color: 'var(--barter)' },
+  { name: 'Welcome bonus', time: 'Account signup', amount: '+5 cr', type: 'pos', color: 'var(--grid)' },
+]
 
-  const [activeCategory, setActiveCategory] = useState(initialCategory)
-
-  useEffect(() => {
-    const cat = queryParams.get('category')
-    if (cat) {
-      // Map URL params to exact category names
-      if (cat === 'services') setActiveCategory('Services')
-      else if (cat === 'goods') setActiveCategory('Goods')
-      else if (cat === 'tutoring') setActiveCategory('Academic Tutoring')
-      else setActiveCategory('All')
-    } else {
-      setActiveCategory('All')
-    }
-  }, [location.search])
-
-  const categories = ['All', 'Services', 'Goods', 'Academic Tutoring']
-
-  const filteredListings = activeCategory === 'All' 
-    ? ALL_LISTINGS 
-    : ALL_LISTINGS.filter(l => l.category === activeCategory)
+export default function SkillBarter() {
+  const [credits] = useState(24)
+  const [pending] = useState(2)
 
   return (
-    <main style={{ paddingTop: '6rem', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <div className="container" style={{ flex: 1, display: 'flex', gap: '2rem', paddingBottom: '4rem' }}>
-        
-        {/* Sidebar */}
-        <aside style={{ width: '250px', flexShrink: 0, paddingRight: '2rem', borderRight: '1px solid var(--border)' }}>
-          <div style={{ marginBottom: '2rem' }}>
-            <Link to="/barter" style={{ textDecoration: 'none', color: 'var(--muted)', fontSize: '0.9rem', fontWeight: 600 }}>
-              ← Back to Barter
-            </Link>
-          </div>
-          <h3 style={{ fontFamily: 'Fraunces, serif', fontSize: '1.2rem', marginBottom: '1.5rem' }}>Categories</h3>
-          <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {categories.map(cat => (
-              <li key={cat}>
-                <button 
-                  onClick={() => setActiveCategory(cat)}
-                  style={{
-                    width: '100%',
-                    textAlign: 'left',
-                    padding: '0.6rem 1rem',
-                    borderRadius: '8px',
-                    border: 'none',
-                    background: activeCategory === cat ? 'var(--barter-bg)' : 'transparent',
-                    color: activeCategory === cat ? 'var(--barter)' : 'var(--text)',
-                    fontWeight: activeCategory === cat ? 700 : 500,
-                    cursor: 'pointer',
-                    fontFamily: 'DM Sans, sans-serif',
-                    fontSize: '0.95rem',
-                    transition: 'all 0.2s'
-                  }}
-                >
-                  {cat}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </aside>
+    <main style={{ paddingTop: '5rem' }}>
+      {/* HEADER */}
+      <section id="barter" style={{ background: 'var(--barter-bg)', padding: '4rem 2rem 3rem' }}>
+        <div className="container">
+          <div className="section-eyebrow" style={{ color: 'var(--barter)' }}>Module 01 · Skill Barter</div>
+          <h2 className="section-title">Trade skills. <em style={{ color: 'var(--barter)' }}>Not cash.</em></h2>
+          <p className="section-desc">Students at OAU are highly skilled but often cash-constrained. Skill Barter replaces money with platform credits — so your knowledge has real value.</p>
+        </div>
+      </section>
 
-        {/* Main Content */}
-        <section style={{ flex: 1 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-            <h2 style={{ fontFamily: 'Fraunces, serif', fontSize: '2rem', color: 'var(--text)', margin: 0 }}>
-              {activeCategory === 'All' ? 'Marketplace' : activeCategory}
-            </h2>
-            <div style={{ fontSize: '0.9rem', color: 'var(--muted)' }}>
-              Showing {filteredListings.length} results
+      {/* TWO COL: FEATURES + WALLET */}
+      <section style={{ padding: '4rem 2rem' }}>
+        <div className="container">
+          <div className="two-col">
+            {/* Features */}
+            <div>
+              <div className="feat-grid">
+                <div className="feat-box"><div className="feat-box-icon">📋</div><h4>Skill Listings</h4><p>Post your skills publicly. Set your rate, availability, and subject. Students find and book you directly.</p></div>
+                <div className="feat-box"><div className="feat-box-icon">🔒</div><h4>Escrow System</h4><p>Credits lock in escrow before every session. Released only on mutual confirmation — both parties protected.</p></div>
+                <div className="feat-box"><div className="feat-box-icon">⭐</div><h4>Reputation</h4><p>5-star ratings and written reviews after every session. Your profile builds real credibility over time.</p></div>
+                <div className="feat-box"><div className="feat-box-icon">🎨</div><h4>Any Skill</h4><p>Not just academics. Slide design, CV writing, photography, coding help — every OAU skill has value here.</p></div>
+              </div>
             </div>
-          </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
-            {filteredListings.map(l => (
-              <div key={l.id} className="product-card" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+            {/* Wallet */}
+            <div>
+              <div className="wallet-card">
+                <div className="wallet-header">
                   <div>
-                    <div style={{ fontFamily: 'Fraunces, serif', fontWeight: 900, fontSize: '1.1rem', color: 'var(--text)', marginBottom: '0.3rem' }}>{l.title}</div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Seller: {l.seller}</div>
+                    <div className="wallet-label">Credit Wallet</div>
+                    <div className="wallet-balance">{credits} <span>credits</span></div>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--muted)', marginBottom: '0.3rem' }}>= {Math.floor(credits / 2)} hours of tutoring</div>
+                    <div className="wallet-pending">+{pending} pending verification</div>
                   </div>
                 </div>
-                <span style={{ display: 'inline-block', fontSize: '0.7rem', padding: '0.2rem 0.6rem', borderRadius: '999px', background: 'var(--bg2)', color: 'var(--text)', fontWeight: 600, marginBottom: '1rem' }}>
-                  {l.category}
-                </span>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                  <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 900, color: 'var(--barter)', fontSize: '1.3rem' }}>{l.price}</span>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>⭐ {l.rating}</span>
+                <div className="tx-list">
+                  {TRANSACTIONS.map((tx, i) => (
+                    <div className="tx" key={i}>
+                      <div className="tx-left">
+                        <div className="tx-dot" style={{ background: tx.color }}></div>
+                        <div><div className="tx-name">{tx.name}</div><div className="tx-time">{tx.time}</div></div>
+                      </div>
+                      <div className={`tx-amount ${tx.type}`}>{tx.amount}</div>
+                    </div>
+                  ))}
                 </div>
-                <button style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid var(--barter)', background: 'var(--barter-bg)', color: 'var(--barter)', fontWeight: 700, cursor: 'pointer', fontFamily: 'DM Sans, sans-serif', fontSize: '0.85rem', transition: 'all 0.2s' }}>
-                  Purchase / Book
-                </button>
               </div>
-            ))}
-          </div>
-
-          {filteredListings.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--muted)' }}>
-              No listings available in this category yet.
             </div>
-          )}
-        </section>
+          </div>
+        </div>
+      </section>
 
+      {/* ECONOMY BAND */}
+      <div className="economy-band">
+        <div className="economy-inner">
+          <div className="eco-item"><strong>1 cr</strong><p>= 30 minutes of tutoring or equivalent service</p></div>
+          <div className="eco-item"><strong>5 cr</strong><p>Free credits on signup</p></div>
+          <div className="eco-item"><strong>2 cr</strong><p>Earned per verified OAU past question uploaded</p></div>
+          <div className="eco-item"><strong>0%</strong><p>Escrow protects every session</p></div>
+        </div>
       </div>
+
+      {/* EXPLORE THE MARKETPLACE */}
+      <section style={{ padding: '4rem 2rem', background: 'var(--surface)' }}>
+        <div className="container">
+          <h2 className="section-title" style={{ marginBottom: '2.5rem' }}>Explore the Marketplace</h2>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            
+            <Link to="/marketplace?category=services" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="product-card" style={{ background: 'var(--bg)', border: '1px solid var(--border)', height: '100%' }}>
+                <div className="card-icon" style={{ background: 'var(--barter-light)', color: 'var(--barter)' }}>💼</div>
+                <h3 style={{ fontFamily: 'Fraunces, serif', fontSize: '1.4rem', fontWeight: 900, color: 'var(--text)', marginBottom: '0.5rem' }}>Services</h3>
+                <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>Find student freelancers for design, writing, coding, photography, and other professional services.</p>
+              </div>
+            </Link>
+
+            <Link to="/marketplace?category=goods" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="product-card" style={{ background: 'var(--bg)', border: '1px solid var(--border)', height: '100%' }}>
+                <div className="card-icon" style={{ background: 'var(--grid-light)', color: 'var(--grid)' }}>📦</div>
+                <h3 style={{ fontFamily: 'Fraunces, serif', fontSize: '1.4rem', fontWeight: 900, color: 'var(--text)', marginBottom: '0.5rem' }}>Goods</h3>
+                <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>Buy and sell physical items like textbooks, lab coats, drawing boards, and electronics.</p>
+              </div>
+            </Link>
+
+            <Link to="/marketplace?category=tutoring" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="product-card" style={{ background: 'var(--bg)', border: '1px solid var(--border)', height: '100%' }}>
+                <div className="card-icon" style={{ background: 'var(--brain-light)', color: 'var(--brain)' }}>📚</div>
+                <h3 style={{ fontFamily: 'Fraunces, serif', fontSize: '1.4rem', fontWeight: 900, color: 'var(--text)', marginBottom: '0.5rem' }}>Academic Tutoring</h3>
+                <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>Book sessions for MTH 202, PHY 105, CHM 101, and other courses from top students.</p>
+              </div>
+            </Link>
+
+          </div>
+        </div>
+      </section>
     </main>
   )
 }

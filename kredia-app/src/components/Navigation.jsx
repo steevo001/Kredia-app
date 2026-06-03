@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 export default function Navigation() {
   const location = useLocation()
   const links = [
-    { to: '/barter', label: 'Skill Barter' },
+    { to: '/marketplace', label: 'Marketplace' },
     { to: '/brain', label: 'OAU Brain' },
     { to: '/grid', label: 'Space Grid' },
   ]
@@ -18,7 +18,10 @@ export default function Navigation() {
           </li>
         ))}
       </ul>
-      <Link to="/barter" className="nav-cta">Get Started</Link>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+        <Link to="/login" style={{ textDecoration: 'none', color: 'var(--text)', fontWeight: 700, fontSize: '0.95rem' }}>Log In</Link>
+        <Link to="/signup" className="nav-cta">Get Started</Link>
+      </div>
     </nav>
   )
 }
